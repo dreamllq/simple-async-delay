@@ -1,18 +1,50 @@
 # simple-async-delay
 
-能够await执行的延迟方法
+A minimal, awaitable delay utility for JavaScript/TypeScript.
 
-## 安装
+## Install
 
 ```bash
 npm i simple-async-delay
 ```
 
-## 使用
+## Usage
 
-```js
+```ts
 import delay from 'simple-async-delay';
 
-await delay(1000);
-// 延迟一秒
+await delay(1000); // pause for 1 second
 ```
+
+### Sequential delays
+
+```ts
+await delay(500);
+console.log('step 1');
+
+await delay(500);
+console.log('step 2');
+```
+
+### In async loops
+
+```ts
+for (const item of items) {
+  await processItem(item);
+  await delay(200); // throttle between iterations
+}
+```
+
+## API
+
+### `delay(ms: number): Promise<void>`
+
+Returns a Promise that resolves after `ms` milliseconds.
+
+| Parameter | Type     | Description            |
+|-----------|----------|------------------------|
+| `ms`      | `number` | Delay duration in ms   |
+
+## License
+
+[MIT](./LICENSE)
